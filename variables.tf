@@ -8,6 +8,21 @@ variable "tags" {
   default = ""
 }
 
+variable "hazelcast_version" {
+  description = "Hazelcast version to deploy"
+  default = ""
+}
+
+variable "hazelcast_container_cpu" {
+  description = "Hazelcast container CPU units"
+  default = ""
+}
+
+variable "hazelcast_container_memory" {
+  description = "Hazelcast container memory"
+  default = ""
+}
+
 variable "instance_type" {
   description = "EC2 Instance type to launch for ECS"
   default = ""
