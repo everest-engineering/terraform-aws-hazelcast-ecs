@@ -8,7 +8,6 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
-
 resource "aws_instance" "hazelcast-instance" {
   ami                    = data.aws_ami.amazon-linux-2.id
   instance_type          = var.instance_type
