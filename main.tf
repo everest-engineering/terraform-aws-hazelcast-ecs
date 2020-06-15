@@ -10,7 +10,6 @@ data "template_file" "container_definition" {
     hazelcast_version          = var.hazelcast_version
     hazelcast_container_cpu    = var.hazelcast_container_cpu
     hazelcast_container_memory = var.hazelcast_container_memory
-    volume_name            = var.name
   }
 }
 
@@ -19,7 +18,7 @@ resource "aws_ecs_task_definition" "hazelcast_task" {
   family                   = var.name
   network_mode             = "host"
   requires_compatibilities = ["EC2"]
-  tags = var.tags
+  tags                     = var.tags
 }
 
 resource "aws_ecs_service" "hazelcast_ecs_service" {
