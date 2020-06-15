@@ -61,7 +61,7 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "ecs-ec2-container-service-policy-attachment" {
   role       = aws_iam_role.ecs-ec2-role.id
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceForEC2Role"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
 resource "aws_iam_role_policy_attachment" "ecs-ec2-ssm-policy-attachement" {
