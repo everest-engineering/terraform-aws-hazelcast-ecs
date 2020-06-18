@@ -10,7 +10,7 @@ data "template_file" "container_definition" {
     hazelcast_version          = var.hazelcast_version
     hazelcast_container_cpu    = var.hazelcast_container_cpu
     hazelcast_container_memory = var.hazelcast_container_memory
-    instance_public_ip         = aws_instance.hazelcast-instance.public_ip
+    instance_public_ip         = aws_instance.hazelcast_instance.public_ip
   }
 }
 
