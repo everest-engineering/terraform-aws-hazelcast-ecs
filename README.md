@@ -14,6 +14,8 @@ This module creates the following resources required for Hazelcast container to 
 
 This approach creates an ECS task for Hazelcast and runs/manages that task on EC2 instance of provided instance type.
 
+![Architecture](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/blob/master/diagrams/hazelcast_on_ecs.png?raw=true)
+
 ## Contributing
 We appreciate your help!
  
