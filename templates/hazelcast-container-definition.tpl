@@ -10,6 +10,12 @@
         "containerPort": 5701,
         "hostPort": 5701
       }
+    ],
+    "environment": [
+      {
+        "name": "JAVA_OPTS",
+        "value": "-Dhazelcast.local.publicAddress=${instance_public_ip}:5701"
+      }
     ]
   }
 ]

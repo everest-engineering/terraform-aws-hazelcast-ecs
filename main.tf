@@ -10,13 +10,14 @@ data "template_file" "container_definition" {
     hazelcast_version          = var.hazelcast_version
     hazelcast_container_cpu    = var.hazelcast_container_cpu
     hazelcast_container_memory = var.hazelcast_container_memory
+    instance_public_ip         = aws_instance.hazelcast-instance.public_ip
   }
 }
 
 resource "aws_ecs_task_definition" "hazelcast_task" {
   container_definitions    = data.template_file.container_definition.rendered
   family                   = var.name
-  network_mode             = "host"
+  network_mode             = "bridge"
   requires_compatibilities = ["EC2"]
   tags                     = var.tags
 }
