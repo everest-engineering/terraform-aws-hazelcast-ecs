@@ -7,10 +7,15 @@ from diagrams.onprem.inmemory import Hazelcast
 
 graph_attr = {
     "fontsize": "30",
-    "bgcolor": "transparent"
+    "bgcolor": "transparent",
+    "penwidth": "2.5",
+    "pencolor": "'black'",
+    "pad": "0.5",
+    "fixedsize": "shape",
+    "width": "10.0"
 }
 
-with Diagram("Hazelcast on ECS", show=False, graph_attr=graph_attr):
+with Diagram("Hazelcast IMDG on ECS", show=False, graph_attr=graph_attr):
     dns = Dns("Internet")
     with Cluster("AWS"):
         vpc = VPC("VPC")
