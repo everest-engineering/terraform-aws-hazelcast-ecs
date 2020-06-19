@@ -10,7 +10,7 @@ graph_attr = {
     "bgcolor": "transparent",
     "penwidth": "2.5",
     "pencolor": "'black'",
-    "pad": "0.5",
+    "pad": "0.8",
     "fixedsize": "shape",
     "width": "10.0"
 }
