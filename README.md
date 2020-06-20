@@ -16,6 +16,47 @@ This approach creates an ECS task for Hazelcast and runs/manages that task on EC
 
 ![Architecture](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/blob/master/diagrams/hazelcast_imdg_on_ecs.png?raw=true)
 
+## Prerequisites
+
+1. Configure AWS credentials. Refer [this](https://docs.aws.amazon.com/amazonswf/latest/awsrbflowguide/set-up-creds.html) for help.
+2. Make sure your AWS user has permissions required to create all resources in the diagram
+3. Install Terraform from [here](https://learn.hashicorp.com/terraform/getting-started/install.html)
+
+## Usage
+
+**Note:**
+Change the inputs to match your requirement.
+
+```hcl
+module "hazelcast_cluster" {
+    source                     = "path-to-the-module"
+    name                       = "hazelcast"
+    hazelcast_version          = "3.12.7"
+    hazelcast_container_cpu    = 512
+    hazelcast_container_memory = 1024
+    instance_type              = "t3.small"
+    security_group_id          = "security-group-id"
+    subnet_id                  = "subnet-id"
+    
+    tags = {
+      Environment = "Development"
+      CreatedBy = "Terraform"
+    }
+}
+```
+
+## Examples
+
+Try out the module functionality with an example defined [here](examples/single-node/main.tf).
+
+1. Switch to examples directory `cd examples`
+2. Initialize Terraform to download required plugins `terraform init`
+3. Run `plan` to find out all resources that are going to be created `terraform plan`
+4. Run `apply` to create those resources `terraform apply`
+5. Install a [Hazelcast Client](https://hazelcast.org/imdg/clients-languages/) and test the connection
+with the instance public IP address
+6. Make sure to destroy them once you are done exploring `terraform destroy`
+
 ## Inputs
 
 | Name                       | Description                         |  Type  | Default | Required |
@@ -52,6 +93,6 @@ Browse through the
 
 ## Authors
 
-[![Alt text](https://github.com/everest-engineering/terraform-aws-mongodb-ecs/blob/master/images/banner.png?raw=true)](https://everest.engineering)
+[![Alt text](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/blob/master/diagrams/banner.png?raw=true)](https://everest.engineering)
 
 [![License: EverestEngineering](https://img.shields.io/badge/Copyright%20%C2%A9-EVERESTENGINEERING-blue)](https://everest.engineering)
