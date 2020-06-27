@@ -10,6 +10,11 @@ variable "region" {
   description = "AWS Region"
 }
 
+variable "ami_id" {
+  description = "ECS Optimised AWS EC2 AMI ID"
+  default = ""
+}
+
 variable "hazelcast_version" {
   description = "Hazelcast version to deploy"
 }

@@ -59,21 +59,22 @@ Try out the module functionality with an example defined [here](examples/single-
 
 ## Inputs
 
-| Name                          | Description                         |  Type  |      Default      | Required |
-| ----------------------------- | ----------------------------------- | :----: | :---------------: | :------: |
-| name                          | The name of the deployment          | string |       `n/a`       |   yes    |
-| tags                          | Tags for the created resources      |  map   |       `n/a`       |   yes    |
-| region                        | AWS Region                          | string |       `n/a`       |   yes    |
-| hazelcast_version             | Hazelcast version to deploy         | string |      latest       |   yes    |
-| hazelcast_container_cpu       | Hazelcast container CPU units       | string |       `n/a`       |   yes    |
-| hazelcast_container_memory    | Hazelcast container memory          | string |       `n/a`       |   yes    |
-| hazelcast_discovery_tag_key   | Hazelcast AWS Discovery Tag Key     | string | hazelcast_cluster |  false   |
-| hazelcast_discovery_tag_value | Hazelcast AWS Discovery Tag Value   | string |     hazelcast     |  false   |
-| members_count                 | Hazelcast members / tasks count     | number |         1         |  false   |
-| instance_type                 | EC2 Instance type to launch for ECS | string |       `n/a`       |   yes    |
-| instance_count                | EC2 Instance count                  | number |         1         |  false   |
-| security_group_id             | EC2 Security Group ID               | string |       `n/a`       |   yes    |
-| subnet_id                     | EC2 Subnet ID                       | string |       `n/a`       |   yes    |
+| Name                          | Description                         |  Type  | Default                  | Required |
+| ----------------------------- | ----------------------------------- | :----: | ------------------------ | :------: |
+| name                          | The name of the deployment          | string | `n/a`                    |   yes    |
+| tags                          | Tags for the created resources      |  map   | `n/a`                    |   yes    |
+| region                        | AWS Region                          | string | `n/a`                    |   yes    |
+| ami_id                        | ECS Optimised AWS EC2 AMI ID        | string | latest ECS Optimised AMI |    no    |
+| hazelcast_version             | Hazelcast version to deploy         | string | latest                   |   yes    |
+| hazelcast_container_cpu       | Hazelcast container CPU units       | string | `n/a`                    |   yes    |
+| hazelcast_container_memory    | Hazelcast container memory          | string | `n/a`                    |   yes    |
+| hazelcast_discovery_tag_key   | Hazelcast AWS Discovery Tag Key     | string | hazelcast_cluster        |    no    |
+| hazelcast_discovery_tag_value | Hazelcast AWS Discovery Tag Value   | string | hazelcast                |    no    |
+| members_count                 | Hazelcast members / tasks count     | number | 1                        |    no    |
+| instance_type                 | EC2 Instance type to launch for ECS | string | `n/a`                    |   yes    |
+| instance_count                | EC2 Instance count                  | number | 1                        |    no    |
+| security_group_id             | EC2 Security Group ID               | string | `n/a`                    |   yes    |
+| subnet_id                     | EC2 Subnet ID                       | string | `n/a`                    |   yes    |
 
 ## Outputs
 
