@@ -37,7 +37,7 @@ module "hazelcast_cluster" {
     instance_type              = "t3.small"
     security_group_id          = "security-group-id"
     subnet_id                  = "subnet-id"
-    
+
     tags = {
       Environment = "Development"
       CreatedBy = "Terraform"
@@ -54,30 +54,35 @@ Try out the module functionality with an example defined [here](examples/single-
 3. Run `plan` to find out all resources that are going to be created `terraform plan`
 4. Run `apply` to create those resources `terraform apply`
 5. Install a [Hazelcast Client](https://hazelcast.org/imdg/clients-languages/) and test the connection
-with the instance public IP address
+   with the instance public IP address
 6. Make sure to destroy them once you are done exploring `terraform destroy`
 
 ## Inputs
 
-| Name                       | Description                         |  Type  | Default | Required |
-| -------------------------- | ----------------------------------- | :----: | :-----: | :------: |
-| name                       | The name of the deployment          | string |  `n/a`  |   yes    |
-| tags                       | Tags for the created resources      |  map   |   {}    |   yes    |
-| hazelcast_version          | Hazelcast version to deploy         | string |  `n/a`  |   yes    |
-| hazelcast_container_cpu    | Hazelcast container CPU units       | string |  `n/a`  |   yes    |
-| hazelcast_container_memory | Hazelcast container memory          | string |  `n/a`  |   yes    |
-| instance_type              | EC2 Instance type to launch for ECS | string |  `n/a`  |   yes    |
-| security_group_id          | EC2 Security Group ID               | string |  `n/a`  |   yes    |
-| subnet_id                  | EC2 Subnet ID                       | string |  `n/a`  |   yes    |
+| Name                          | Description                         |  Type  |      Default      | Required |
+| ----------------------------- | ----------------------------------- | :----: | :---------------: | :------: |
+| name                          | The name of the deployment          | string |       `n/a`       |   yes    |
+| tags                          | Tags for the created resources      |  map   |       `n/a`       |   yes    |
+| region                        | AWS Region                          | string |       `n/a`       |   yes    |
+| hazelcast_version             | Hazelcast version to deploy         | string |      latest       |   yes    |
+| hazelcast_container_cpu       | Hazelcast container CPU units       | string |       `n/a`       |   yes    |
+| hazelcast_container_memory    | Hazelcast container memory          | string |       `n/a`       |   yes    |
+| hazelcast_discovery_tag_key   | Hazelcast AWS Discovery Tag Key     | string | hazelcast_cluster |  false   |
+| hazelcast_discovery_tag_value | Hazelcast AWS Discovery Tag Value   | string |     hazelcast     |  false   |
+| members_count                 | Hazelcast members / tasks count     | number |         1         |  false   |
+| instance_type                 | EC2 Instance type to launch for ECS | string |       `n/a`       |   yes    |
+| instance_count                | EC2 Instance count                  | number |         1         |  false   |
+| security_group_id             | EC2 Security Group ID               | string |       `n/a`       |   yes    |
+| subnet_id                     | EC2 Subnet ID                       | string |       `n/a`       |   yes    |
 
 ## Outputs
 
-| Name                | Description                        |
-| ------------------- | ---------------------------------- |
-| ecs_cluster_arn     | ARN of ECS Cluster                 |
-| ecs_cluster_name    | Name of the ECS Cluster            |
-| instance_public_ip  | Public IP of the ECS EC2 instance  |
-| instance_private_ip | Private IP of the ECS EC2 instance |
+| Name                | Description                           |
+| ------------------- | ------------------------------------- |
+| ecs_cluster_arn     | ARN of ECS Cluster                    |
+| ecs_cluster_name    | Name of the ECS Cluster               |
+| instance_public_ip  | Public IP of the ECS EC2 instance(s)  |
+| instance_private_ip | Private IP of the ECS EC2 instance(s) |
 
 ## Contributing
 
