@@ -1,10 +1,15 @@
-data "aws_ami" "amazon_linux_2" {
+data "aws_ami" "ecs" {
   most_recent = true
   owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-ecs-hvm-*-ebs"]
+    values = ["amzn2-ami-ecs-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
 
@@ -17,12 +22,12 @@ data "template_file" "user_data" {
 }
 
 resource "aws_instance" "hazelcast_instance" {
-  ami                    = data.aws_ami.amazon_linux_2.id
+  ami                    = data.aws_ami.ecs.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [var.security_group_id]
   subnet_id              = var.subnet_id
   iam_instance_profile   = aws_iam_instance_profile.default.id
   user_data              = data.template_file.user_data.rendered
-  tags = var.tags
+  tags                   = var.tags
 }
 
