@@ -36,8 +36,13 @@ variable "instance_type" {
   description = "EC2 Instance type to launch for ECS"
 }
 
-variable "members_count" {
+variable "instance_count" {
   description = "EC2 Instance count"
+  default     = 1
+}
+
+variable "members_count" {
+  description = "Hazelcast members / tasks"
   default     = 1
 }
 

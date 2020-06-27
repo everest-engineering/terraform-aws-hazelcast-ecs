@@ -31,7 +31,7 @@ data "template_file" "user_data" {
 }
 
 resource "aws_instance" "hazelcast_instance" {
-  count                  = var.members_count
+  count                  = var.instance_count
   ami                    = data.aws_ami.ecs.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [var.security_group_id]
