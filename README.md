@@ -27,16 +27,44 @@ This approach creates an ECS task for Hazelcast and runs/manages that task on EC
 **Note:**
 Change the inputs to match your requirement.
 
+For a single member deployment:
+
 ```hcl
 module "hazelcast_cluster" {
     source                     = "path-to-the-module"
+    region                     = "ap-southeast-1"
     name                       = "hazelcast"
     hazelcast_version          = "3.12.7"
     hazelcast_container_cpu    = 512
-    hazelcast_container_memory = 1024
+    hazelcast_container_memory = 2048
     instance_type              = "t3.small"
     security_group_id          = "security-group-id"
     subnet_id                  = "subnet-id"
+
+    tags = {
+      Environment = "Development"
+      CreatedBy = "Terraform"
+    }
+}
+```
+
+For a multi member deployment:
+
+```hcl
+module "hazelcast_cluster" {
+    source                        = "path-to-the-module"
+    region                        = "ap-southeast-1"
+    name                          = "hazelcast"
+    hazelcast_version             = "3.12.7"
+    hazelcast_container_cpu       = 512
+    hazelcast_container_memory    = 2048
+    instance_type                 = "t3.small"
+    security_group_id             = "security-group-id"
+    subnet_id                     = "subnet-id"
+    instance_count                = 2
+    members_count                 = 2
+    hazelcast_discovery_tag_key   = 'application'
+    hazelcast_discovery_tag_value = 'erp'
 
     tags = {
       Environment = "Development"
@@ -76,9 +104,7 @@ Try out the module functionality with an example defined [here](examples/single-
 | security_group_id             | EC2 Security Group ID               | string | `n/a`                    |   yes    |
 | subnet_id                     | EC2 Subnet ID                       | string | `n/a`                    |   yes    |
 
-#### Note
-
-Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
+**Note:** Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
 
 ## Outputs
 
