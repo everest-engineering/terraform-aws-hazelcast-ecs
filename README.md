@@ -76,6 +76,10 @@ Try out the module functionality with an example defined [here](examples/single-
 | security_group_id             | EC2 Security Group ID               | string | `n/a`                    |   yes    |
 | subnet_id                     | EC2 Subnet ID                       | string | `n/a`                    |   yes    |
 
+#### Note
+
+Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
+
 ## Outputs
 
 | Name                | Description                           |
