@@ -36,7 +36,7 @@ variable "instance_type" {
   description = "EC2 Instance type to launch for ECS"
 }
 
-variable "instance_count" {
+variable "members_count" {
   description = "EC2 Instance count"
   default     = 1
 }
