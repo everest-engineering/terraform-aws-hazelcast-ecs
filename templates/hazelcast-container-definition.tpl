@@ -11,10 +11,16 @@
         "hostPort": 5701
       }
     ],
+    "mountPoints": [
+      {
+         "containerPath": "/opt/hazelcast/config_ext",
+         "sourceVolume": "hazelcast_config"
+      }
+    ],
     "environment": [
       {
         "name": "JAVA_OPTS",
-        "value": "-Dhazelcast.local.publicAddress=${instance_public_ip}:5701"
+        "value": "-Dhazelcast.config=/opt/hazelcast/config_ext/hazelcast.yaml"
       }
     ]
   }
