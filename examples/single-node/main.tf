@@ -1,5 +1,6 @@
 module "hazelcast_ecs_cluster" {
   source = "../../"
+  region = "ap-southeast-1"
 
   name                       = "hazelcast"
   hazelcast_version          = "3.12.7"
@@ -11,11 +12,11 @@ module "hazelcast_ecs_cluster" {
 
   tags = {
     Environment = "Testing"
-    CreatedBy = "Terraform"
+    CreatedBy   = "Terraform"
   }
 }
 
 output "public_ip" {
   description = "Public IP Address"
-  value = module.hazelcast_ecs_cluster.instance_public_ip
+  value       = module.hazelcast_ecs_cluster.instance_public_ip
 }
