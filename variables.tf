@@ -29,12 +29,6 @@ variable "hazelcast_container_memory" {
 
 variable "hazelcast_discovery_tag_key" {
   description = "Hazelcast AWS Discovery Tag Key"
-  default     = "hazelcast-cluster"
-}
-
-variable "hazelcast_discovery_tag_value" {
-  description = "Hazelcast AWS Discovery Tag Value"
-  default     = "hazelcast"
 }
 
 variable "instance_type" {

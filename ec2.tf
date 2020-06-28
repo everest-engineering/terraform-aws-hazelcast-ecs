@@ -18,7 +18,7 @@ data template_file "hazelcast_config" {
   vars     = {
     region                        = var.region
     hazelcast_discovery_tag_key   = var.hazelcast_discovery_tag_key
-    hazelcast_discovery_tag_value = var.hazelcast_discovery_tag_value
+    hazelcast_discovery_tag_value = var.tags[var.hazelcast_discovery_tag_key]
   }
 }
 

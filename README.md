@@ -31,17 +31,19 @@ For a single member deployment:
 
 ```hcl
 module "hazelcast_cluster" {
-    source                     = "path-to-the-module"
-    region                     = "ap-southeast-1"
-    name                       = "hazelcast"
-    hazelcast_version          = "3.12.7"
-    hazelcast_container_cpu    = 512
-    hazelcast_container_memory = 2048
-    instance_type              = "t3.small"
-    security_group_id          = "security-group-id"
-    subnet_id                  = "subnet-id"
-
+    source                        = "path-to-the-module"
+    region                        = "ap-southeast-1"
+    name                          = "hazelcast"
+    hazelcast_version             = "3.12.7"
+    hazelcast_container_cpu       = 512
+    hazelcast_container_memory    = 2048
+    instance_type                 = "t3.small"
+    security_group_id             = "security-group-id"
+    subnet_id                     = "subnet-id"
+    hazelcast_discovery_tag_key   = 'Purpose'
+    
     tags = {
+      Purpose = "Orders"
       Environment = "Development"
       CreatedBy = "Terraform"
     }
@@ -63,10 +65,10 @@ module "hazelcast_cluster" {
     subnet_id                     = "subnet-id"
     instance_count                = 2
     members_count                 = 2
-    hazelcast_discovery_tag_key   = 'application'
-    hazelcast_discovery_tag_value = 'erp'
+    hazelcast_discovery_tag_key   = 'Purpose'
 
     tags = {
+      Purpose = "Orders"
       Environment = "Development"
       CreatedBy = "Terraform"
     }
@@ -97,14 +99,15 @@ Try out the module functionality with an example defined [here](examples/single-
 | hazelcast_container_cpu       | Hazelcast container CPU units       | string | `n/a`                    |   yes    |
 | hazelcast_container_memory    | Hazelcast container memory          | string | `n/a`                    |   yes    |
 | hazelcast_discovery_tag_key   | Hazelcast AWS Discovery Tag Key     | string | hazelcast_cluster        |    no    |
-| hazelcast_discovery_tag_value | Hazelcast AWS Discovery Tag Value   | string | hazelcast                |    no    |
 | members_count                 | Hazelcast members / tasks count     | number | 1                        |    no    |
 | instance_type                 | EC2 Instance type to launch for ECS | string | `n/a`                    |   yes    |
 | instance_count                | EC2 Instance count                  | number | 1                        |    no    |
 | security_group_id             | EC2 Security Group ID               | string | `n/a`                    |   yes    |
 | subnet_id                     | EC2 Subnet ID                       | string | `n/a`                    |   yes    |
 
-**Note:** Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
+**Notes:**
+- Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
+- `hazelcast_discovery_tag_key` will be used to configure auto discovery with Hazelcast AWS plugin
 
 ## Outputs
 
