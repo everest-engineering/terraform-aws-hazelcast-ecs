@@ -41,7 +41,7 @@ module "hazelcast_cluster" {
     security_group_id             = "security-group-id"
     subnet_id                     = "subnet-id"
     hazelcast_discovery_tag_key   = 'Purpose'
-    
+
     tags = {
       Purpose = "Orders"
       Environment = "Development"
@@ -89,23 +89,24 @@ Try out the module functionality with an example defined [here](examples/single-
 
 ## Inputs
 
-| Name                          | Description                         |  Type  | Default                  | Required |
-| ----------------------------- | ----------------------------------- | :----: | ------------------------ | :------: |
-| name                          | The name of the deployment          | string | `n/a`                    |   yes    |
-| tags                          | Tags for the created resources      |  map   | `n/a`                    |   yes    |
-| region                        | AWS Region                          | string | `n/a`                    |   yes    |
-| ami_id                        | ECS Optimised AWS EC2 AMI ID        | string | latest ECS Optimised AMI |    no    |
-| hazelcast_version             | Hazelcast version to deploy         | string | latest                   |   yes    |
-| hazelcast_container_cpu       | Hazelcast container CPU units       | string | `n/a`                    |   yes    |
-| hazelcast_container_memory    | Hazelcast container memory          | string | `n/a`                    |   yes    |
-| hazelcast_discovery_tag_key   | Hazelcast AWS Discovery Tag Key     | string | hazelcast_cluster        |    no    |
-| members_count                 | Hazelcast members / tasks count     | number | 1                        |    no    |
-| instance_type                 | EC2 Instance type to launch for ECS | string | `n/a`                    |   yes    |
-| instance_count                | EC2 Instance count                  | number | 1                        |    no    |
-| security_group_id             | EC2 Security Group ID               | string | `n/a`                    |   yes    |
-| subnet_id                     | EC2 Subnet ID                       | string | `n/a`                    |   yes    |
+| Name                        | Description                         |  Type  | Default                  | Required |
+| --------------------------- | ----------------------------------- | :----: | ------------------------ | :------: |
+| name                        | The name of the deployment          | string | `n/a`                    |   yes    |
+| tags                        | Tags for the created resources      |  map   | `n/a`                    |   yes    |
+| region                      | AWS Region                          | string | `n/a`                    |   yes    |
+| ami_id                      | ECS Optimised AWS EC2 AMI ID        | string | latest ECS Optimised AMI |    no    |
+| hazelcast_version           | Hazelcast version to deploy         | string | latest                   |   yes    |
+| hazelcast_container_cpu     | Hazelcast container CPU units       | string | `n/a`                    |   yes    |
+| hazelcast_container_memory  | Hazelcast container memory          | string | `n/a`                    |   yes    |
+| hazelcast_discovery_tag_key | Hazelcast AWS Discovery Tag Key     | string | `n/a`                    |   yes    |
+| members_count               | Hazelcast members / tasks count     | number | 1                        |    no    |
+| instance_type               | EC2 Instance type to launch for ECS | string | `n/a`                    |   yes    |
+| instance_count              | EC2 Instance count                  | number | 1                        |    no    |
+| security_group_id           | EC2 Security Group ID               | string | `n/a`                    |   yes    |
+| subnet_id                   | EC2 Subnet ID                       | string | `n/a`                    |   yes    |
 
 **Notes:**
+
 - Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
 - `hazelcast_discovery_tag_key` will be used to configure auto discovery with Hazelcast AWS plugin
 
