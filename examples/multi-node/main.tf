@@ -3,14 +3,12 @@ module "hazelcast_ecs_cluster" {
 
   name                       = "hazelcast"
   region                     = "ap-southeast-1"
-
   hazelcast_version          = "3.12.7"
   hazelcast_container_cpu    = 512
-  hazelcast_container_memory = 1900
-
+  hazelcast_container_memory = 2000
   instance_type              = "t3.medium"
-  members_count             = 2
-
+  instance_count             = 2
+  members_count              = 2
   security_group_id          = aws_security_group.hazelcast_ecs_security_group.id
   subnet_id                  = module.dynamic-subnets.public_subnet_ids[0]
 
