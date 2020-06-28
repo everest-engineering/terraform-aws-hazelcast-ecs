@@ -64,7 +64,7 @@ resource "aws_iam_role_policy_attachment" "ecs-ec2-container-service-policy-atta
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
-resource "aws_iam_role_policy_attachment" "ecs-ec2-ssm-policy-attachement" {
+resource "aws_iam_role_policy_attachment" "ecs-ec2-ssm-policy-attachment" {
   role       = aws_iam_role.ecs-ec2-role.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
