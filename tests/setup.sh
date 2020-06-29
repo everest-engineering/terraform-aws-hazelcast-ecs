@@ -17,6 +17,7 @@ sleep 10
 
 # Build the client docker image
 echo -e "${YELLOW}Building the client docker image${NO_COLOUR}"
+./gradlew --no-daemon clean shadowJar
 docker build -t 'local/hazelcast_client:latest' .
 
 # Run the client image
