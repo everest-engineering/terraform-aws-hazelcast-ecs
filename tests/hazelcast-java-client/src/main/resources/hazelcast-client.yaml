@@ -1,0 +1,10 @@
+hazelcast-client:
+  network:
+    aws:
+      enabled: true
+      access-key: <replace-with-aws-access-key-id>
+      secret-key: <replace-with-aws-secret-access-key>
+      region: ap-southeast-1
+      use-public-ip: true
+      tag-key: Environment
+      tag-value: Testing
