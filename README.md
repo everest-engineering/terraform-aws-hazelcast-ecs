@@ -64,11 +64,11 @@ module "hazelcast_cluster" {
     hazelcast_version             = "3.12.7"
     hazelcast_container_cpu       = 512
     hazelcast_container_memory    = 2048
+    hazelcast_members_count       = 2
     instance_type                 = "t3.small"
     security_group_id             = "security-group-id"
     subnet_id                     = "subnet-id"
     instance_count                = 2
-    members_count                 = 2
     hazelcast_discovery_tag_key   = 'Purpose'
 
     tags = {
@@ -103,7 +103,7 @@ Try out the module functionality with an example defined [here](examples/single-
 | hazelcast_container_cpu     | Hazelcast container CPU units       | string | `n/a`                    |   yes    |
 | hazelcast_container_memory  | Hazelcast container memory          | string | `n/a`                    |   yes    |
 | hazelcast_discovery_tag_key | Hazelcast AWS Discovery Tag Key     | string | `n/a`                    |   yes    |
-| members_count               | Hazelcast members / tasks count     | number | 1                        |    no    |
+| hazelcast_members_count     | Hazelcast members / tasks count     | number | 1                        |    no    |
 | instance_type               | EC2 Instance type to launch for ECS | string | `n/a`                    |   yes    |
 | instance_count              | EC2 Instance count                  | number | 1                        |    no    |
 | security_group_id           | EC2 Security Group ID               | string | `n/a`                    |   yes    |
@@ -126,14 +126,16 @@ Try out the module functionality with an example defined [here](examples/single-
 ## Testing
 
 #### Prerequisites
+
 - Make sure you have installed JAVA and Docker
 - Set the values `access-key` and `secret-key` in `tests/hazelcast-java-client/src/main/resources/hazelcast-client.yaml`
-with your AWS Access Keys
+  with your AWS Access Keys
 
 #### Setup
+
 The test setup is automated in [setup.sh](tests/setup.sh). It does the following things:
 
-1. Deploys the 'multi-node' example to AWS with Terraform 
+1. Deploys the 'multi-node' example to AWS with Terraform
 2. Verifies that the cluster has formed successfully
 3. Builds the Docker image for the JAVA client
 4. Runs the built Docker image
@@ -141,12 +143,13 @@ The test setup is automated in [setup.sh](tests/setup.sh). It does the following
 6. Verifies client connection to the cluster
 
 #### Teardown
+
 Teardown of the test environment is automated in [teardown.sh](tests/teardown.sh).
 
-1. Destroys the 'multi-node' example 
+1. Destroys the 'multi-node' example
 2. Removes Docker images and containers
 
-*Note:* Don't forget to teardown the cluster to avoid incurring charges.
+_Note:_ Don't forget to teardown the cluster to avoid incurring charges.
 
 ## Contributing
 

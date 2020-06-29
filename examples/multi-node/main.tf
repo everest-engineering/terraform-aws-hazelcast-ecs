@@ -8,7 +8,7 @@ module "hazelcast_ecs_cluster" {
   hazelcast_container_memory  = 1800
   instance_type               = "t3.medium"
   instance_count              = 2
-  members_count               = 2
+  hazelcast_members_count               = 2
   security_group_id           = aws_security_group.hazelcast_ecs_security_group.id
   subnet_id                   = module.dynamic-subnets.public_subnet_ids[0]
   hazelcast_discovery_tag_key = "Environment"

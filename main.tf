@@ -29,7 +29,7 @@ resource "aws_ecs_service" "hazelcast_ecs_service" {
   name                               = var.name
   cluster                            = aws_ecs_cluster.hazelcast_ecs.arn
   task_definition                    = aws_ecs_task_definition.hazelcast_task.arn
-  desired_count                      = var.members_count
+  desired_count                      = var.hazelcast_members_count
   deployment_minimum_healthy_percent = 0
   deployment_maximum_percent         = 100
   launch_type                        = "EC2"

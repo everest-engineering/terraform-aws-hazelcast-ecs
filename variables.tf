@@ -40,7 +40,7 @@ variable "instance_count" {
   default     = 1
 }
 
-variable "members_count" {
+variable "hazelcast_members_count" {
   description = "Hazelcast members / tasks"
   default     = 1
 }
