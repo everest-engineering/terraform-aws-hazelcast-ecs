@@ -23,8 +23,8 @@ resource "aws_iam_instance_profile" "default" {
   role = aws_iam_role.ecs-ec2-role.name
 }
 
-resource "aws_iam_policy" "ecs-ebs-policy" {
-  name = "HazelcastEBSFullAccess"
+resource "aws_iam_policy" "ecs-discovery-policy" {
+  name = "HazelcastECSDiscoveryPolicy"
 
   policy = <<EOF
 {
@@ -33,24 +33,9 @@ resource "aws_iam_policy" "ecs-ebs-policy" {
         {
             "Effect": "Allow",
             "Action": [
-               "ec2:AttachVolume",
-                "ec2:CreateVolume",
-                "ec2:CreateSnapshot",
-                "ec2:CreateTags",
-                "ec2:DeleteVolume",
-                "ec2:DeleteSnapshot",
-                "ec2:DescribeAvailabilityZones",
                 "ec2:DescribeInstances",
-                "ec2:DescribeVolumes",
-                "ec2:DescribeVolumeAttribute",
-                "ec2:DescribeVolumeStatus",
-                "ec2:DescribeSnapshots",
-                "ec2:CopySnapshot",
-                "ec2:DescribeSnapshotAttribute",
-                "ec2:DetachVolume",
-                "ec2:ModifySnapshotAttribute",
-                "ec2:ModifyVolumeAttribute",
-                "ec2:DescribeTags"
+                "ecs:ListTasks",
+                "ecs:DescribeTasks"
             ],
             "Resource": "*"
         }
@@ -69,7 +54,7 @@ resource "aws_iam_role_policy_attachment" "ecs-ec2-ssm-policy-attachment" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_iam_role_policy_attachment" "ecs-ec2-ebs-policy-attachment" {
-  policy_arn = aws_iam_policy.ecs-ebs-policy.arn
+resource "aws_iam_role_policy_attachment" "ecs-discovery-policy-attachment" {
+  policy_arn = aws_iam_policy.ecs-discovery-policy.arn
   role       = aws_iam_role.ecs-ec2-role.id
 }
