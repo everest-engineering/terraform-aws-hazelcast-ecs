@@ -1,3 +1,7 @@
+[![Maintained by Everest Engineering](https://img.shields.io/badge/maintained%20by-everest.engineering-%235849a6.svg)](https://github.com/everest-engineering/)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/everest-engineering/terraform-aws-hazelcast-ecs.svg?label=latest)](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/releases/latest)
+![Terraform Version](https://img.shields.io/badge/tf-%3E%3D0.12.0-blue.svg)
+
 This module is part of a project to simplify the provisioning of Hazelcast on AWS cloud using Terraform. You may also wish to consider [one of the other approaches](https://github.com/everest-engineering/terraform-aws-hazelcast).
 
 # Terraform module to provision Hazelcast using AWS ECS
@@ -119,6 +123,29 @@ Try out the module functionality with an example defined [here](examples/single-
 | instance_public_ip  | Public IP of the ECS EC2 instance(s)  |
 | instance_private_ip | Private IP of the ECS EC2 instance(s) |
 
+## Testing
+
+#### Prerequisites
+- Make sure you have installed JAVA and Docker
+- Set the values `access-key` and `secret-key` in `tests/hazelcast-java-client/src/main/resources/hazelcast-client.yaml`
+with your AWS Access Keys
+
+#### Setup
+The test setup is automated in [setup.sh](tests/setup.sh). It does the following things:
+
+1. Deploys the 'multi-node' example to AWS with Terraform 
+2. Verifies that the cluster has formed successfully
+3. Builds the Docker image for the JAVA client
+4. Runs the built Docker image
+5. Verifies members discovery
+6. Verifies client connection to the cluster
+
+#### Teardown
+Teardown of the test environment is automated in [teardown.sh](tests/teardown.sh).
+
+1. Destroys the 'multi-node' example 
+2. Removes Docker images and containers
+
 ## Contributing
 
 We appreciate your help!
@@ -133,6 +160,6 @@ Browse through the
 
 ## Authors
 
-[![Alt text](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/blob/master/diagrams/banner.png?raw=true)](https://everest.engineering)
+[![Authors: EverestEngineering](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/blob/master/diagrams/banner.png?raw=true)](https://everest.engineering)
 
 [![License: EverestEngineering](https://img.shields.io/badge/Copyright%20%C2%A9-EVERESTENGINEERING-blue)](https://everest.engineering)
