@@ -146,6 +146,8 @@ Teardown of the test environment is automated in [teardown.sh](tests/teardown.sh
 1. Destroys the 'multi-node' example 
 2. Removes Docker images and containers
 
+*Note:* Don't forget to teardown the cluster to avoid incurring charges.
+
 ## Contributing
 
 We appreciate your help!
