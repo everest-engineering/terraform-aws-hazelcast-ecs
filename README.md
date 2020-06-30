@@ -2,36 +2,37 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/everest-engineering/terraform-aws-hazelcast-ecs.svg?label=latest)](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/releases/latest)
 ![Terraform Version](https://img.shields.io/badge/tf-%3E%3D0.12.0-blue.svg)
 
-This module is part of a project to simplify the provisioning of Hazelcast on AWS cloud using Terraform. You may also wish to consider [one of the other approaches](https://github.com/everest-engineering/terraform-aws-hazelcast).
+This module is part of a project to simplify the provisioning of Hazelcast (single or multi-node) on AWS cloud using Terraform. You may also wish to consider [using the Kubernetes Provider](https://github.com/everest-engineering/terraform-kubernetes-hazelcast).
 
 # Terraform module to provision Hazelcast using AWS ECS
 
-Terraform module that provisions Hazelcast container in ECS
+Terraform module that provisions Hazelcast container in ECS.
 
 This module creates the following resources required for Hazelcast container to be up and running in ECS cluster.
 
-1. ECS cluster
-2. ECS task definition and service for provided version of Hazelcast
-3. Roles required for EC2 to execute the task
+1. ECS cluster.
+2. ECS task definition and service for provided version of Hazelcast.
+3. Roles required for EC2 to execute the task.
 
 ### Approach:
 
 This approach creates an ECS task for Hazelcast and runs/manages that task on EC2 instance of provided instance type.
+It allows creating a single or multi node cluster based on inputs to the module. More details [here](#inputs).
 
 ![Architecture](https://github.com/everest-engineering/terraform-aws-hazelcast-ecs/blob/master/diagrams/hazelcast_imdg_on_ecs.png?raw=true)
 
 ## Prerequisites
 
 1. Configure AWS credentials. Refer [this](https://docs.aws.amazon.com/amazonswf/latest/awsrbflowguide/set-up-creds.html) for help.
-2. Make sure your AWS user has permissions required to create all resources in the diagram
-3. Install Terraform from [here](https://learn.hashicorp.com/terraform/getting-started/install.html)
+2. Make sure your AWS user has permissions required to create all resources in the diagram.
+3. Install Terraform from [here](https://learn.hashicorp.com/terraform/getting-started/install.html).
 
 ## Usage
 
 **Note:**
 Change the inputs to match your requirement.
 
-For a single member deployment:
+For a **single member** deployment:
 
 ```hcl
 module "hazelcast_cluster" {
@@ -44,7 +45,7 @@ module "hazelcast_cluster" {
     instance_type                 = "t3.small"
     security_group_id             = "security-group-id"
     subnet_id                     = "subnet-id"
-    hazelcast_discovery_tag_key   = 'Purpose'
+    hazelcast_discovery_tag_key   = "Purpose"
 
     tags = {
       Purpose = "Orders"
@@ -54,7 +55,11 @@ module "hazelcast_cluster" {
 }
 ```
 
-For a multi member deployment:
+For a **multi member** deployment:
+
+**Note:** Set `hazelcast_members_count` for Hazelcast member count and
+`instance_count` for EC2 instance count. This gives the flexibility of, for example,
+configuring three Hazelcast members in two EC2 instances.
 
 ```hcl
 module "hazelcast_cluster" {
@@ -69,7 +74,7 @@ module "hazelcast_cluster" {
     security_group_id             = "security-group-id"
     subnet_id                     = "subnet-id"
     instance_count                = 2
-    hazelcast_discovery_tag_key   = 'Purpose'
+    hazelcast_discovery_tag_key   = "Purpose"
 
     tags = {
       Purpose = "Orders"
@@ -112,7 +117,7 @@ Try out the module functionality with an example defined [here](examples/single-
 **Notes:**
 
 - Please note that the AMI provided must be an ECS Optimised AMI with Docker and ECS agent installed.
-- `hazelcast_discovery_tag_key` will be used to configure auto discovery with Hazelcast AWS plugin
+- `hazelcast_discovery_tag_key` will be used to configure auto discovery with Hazelcast AWS plugin.
 
 ## Outputs
 
@@ -127,27 +132,27 @@ Try out the module functionality with an example defined [here](examples/single-
 
 #### Prerequisites
 
-- Make sure you have installed JAVA and Docker
+- Make sure you have installed JAVA and Docker.
 - Set the values `access-key` and `secret-key` in `tests/hazelcast-java-client/src/main/resources/hazelcast-client.yaml`
-  with your AWS Access Keys
+  with your AWS Access Keys.
 
 #### Setup
 
 The test setup is automated in [setup.sh](tests/setup.sh). It does the following things:
 
-1. Deploys the 'multi-node' example to AWS with Terraform
-2. Verifies that the cluster has formed successfully
-3. Builds the Docker image for the JAVA client
-4. Runs the built Docker image
-5. Verifies members discovery
-6. Verifies client connection to the cluster
+1. Deploys the 'multi-node' example to AWS with Terraform.
+2. Verifies that the cluster has formed successfully.
+3. Builds the Docker image for the JAVA client.
+4. Runs the built Docker image.
+5. Verifies members discovery.
+6. Verifies client connection to the cluster.
 
 #### Teardown
 
 Teardown of the test environment is automated in [teardown.sh](tests/teardown.sh).
 
-1. Destroys the 'multi-node' example
-2. Removes Docker images and containers
+1. Destroys the 'multi-node' example.
+2. Removes Docker images and containers.
 
 _Note:_ Don't forget to teardown the cluster to avoid incurring charges.
 
