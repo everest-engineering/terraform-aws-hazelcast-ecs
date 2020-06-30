@@ -26,8 +26,13 @@ with Diagram("Hazelcast IMDG on ECS", show=False, graph_attr=graph_attr):
 
             with Cluster("ECS Tasks / Containers"):
                 node1 = Hazelcast("Node 1")
-                node2 = Hazelcast("Node 2")
-                containers = [node1, node2]
+                node1ToNode2 = Edge(style="dotted")
 
-    node1 - node2
+                with Cluster("Optional multi-node support"):
+                    node2 = Hazelcast("Node 2")
+                    node3 = Hazelcast("Node n")
+                    node2ToNode3 = Edge(style="dotted")
+
+    node1 - node1ToNode2 - node2
+    node2 - node2ToNode3 - node3
     dns >> vpc >> public_subnet >> node1
